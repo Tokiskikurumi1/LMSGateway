@@ -27,7 +27,7 @@ public class AuthController : ControllerBase
         //    SELECT u.userID, u.userName, u.Email, r.roleName
         //    FROM USER_TABLE u
         //    JOIN ROLES r ON u.roleID = r.roleID
-        //    WHERE u.Account = @acc AND u.Pass = @pass";
+        //    WHERE u.Account = @acc AND u.Pass = @pass"
 
         //var cmd = new SqlCommand(sql, con);
         using var cmd = new SqlCommand("sp_login", con);
