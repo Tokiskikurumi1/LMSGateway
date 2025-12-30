@@ -38,9 +38,9 @@ namespace QLY_LMS.BLL.Teacher_BLL.BLL_Implementations
             return _manageCourse.getAllCoures(TId);
         }
 
-        public bool updateCourse(int courseID, Course course)
+        public bool updateCourse(int courseID, Course course, out string Mess)
         {
-            return _manageCourse.updateCourse(courseID, course);
+            return _manageCourse.updateCourse(courseID, course, out Mess);
         }
 
         public bool deleteCourse(int courseID, int teacherID) 

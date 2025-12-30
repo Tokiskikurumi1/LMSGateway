@@ -81,28 +81,37 @@ namespace QLY_LMS.DAL.Teacher_DAL.Implementations
             }
         }
 
-        public bool updateCourse(int courseID, Course model)
+        public bool updateCourse(int courseID, Course model, out string Mess)
         {
-            using (SqlConnection conn = _db.GetConnection())
+            Mess = string.Empty;
+            try
             {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("tc_course_update", conn))
+                using (SqlConnection conn = _db.GetConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("tc_course_update", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@courseID", courseID);
-                    cmd.Parameters.AddWithValue("@courseName", model.courseName);
-                    cmd.Parameters.AddWithValue("@courseType", model.courseType);
-                    cmd.Parameters.AddWithValue("@courseDes", model.courseDes);
-                    cmd.Parameters.AddWithValue("@courseDate", model.courseDate.ToDateTime(TimeOnly.MinValue));
-                    cmd.Parameters.AddWithValue("@coursePrice", model.coursePrice);
-                    cmd.Parameters.AddWithValue("@courseStatus", model.courseStatus);
-                    cmd.Parameters.AddWithValue("@courseImage", model.courseImage);
-                    cmd.Parameters.AddWithValue("@teacherID", model.teacherID);
+                        cmd.Parameters.AddWithValue("@courseID", courseID);
+                        cmd.Parameters.AddWithValue("@courseName", model.courseName);
+                        cmd.Parameters.AddWithValue("@courseType", model.courseType);
+                        cmd.Parameters.AddWithValue("@courseDes", model.courseDes);
+                        cmd.Parameters.AddWithValue("@courseDate", model.courseDate.ToDateTime(TimeOnly.MinValue));
+                        cmd.Parameters.AddWithValue("@coursePrice", model.coursePrice);
+                        cmd.Parameters.AddWithValue("@courseStatus", model.courseStatus);
+                        cmd.Parameters.AddWithValue("@courseImage", model.courseImage);
+                        cmd.Parameters.AddWithValue("@teacherID", model.teacherID);
 
-                    cmd.ExecuteNonQuery();
-                    return true;
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
                 }
+            }
+            catch (SqlException ex)
+            {
+                Mess = ex.Message;
+                return false;
             }
         }
 
