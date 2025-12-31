@@ -23,13 +23,6 @@ public class AuthController : ControllerBase
         using var con = new SqlConnection(_config.GetConnectionString("LMS"));
         con.Open();
 
-        //string sql = @"
-        //    SELECT u.userID, u.userName, u.Email, r.roleName
-        //    FROM USER_TABLE u
-        //    JOIN ROLES r ON u.roleID = r.roleID
-        //    WHERE u.Account = @acc AND u.Pass = @pass";
-
-        //var cmd = new SqlCommand(sql, con);
         using var cmd = new SqlCommand("sp_login", con);
         cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
