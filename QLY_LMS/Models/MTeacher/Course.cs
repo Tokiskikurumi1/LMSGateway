@@ -5,7 +5,7 @@ namespace QLY_LMS.Models.MTeacher
 {
     public class Course
     {
-        [JsonIgnore]
+        //[JsonIgnore]
         public int courseID { get; set; }
 
         [Required(ErrorMessage = "Tên khóa học không được để trống")]
@@ -32,7 +32,7 @@ namespace QLY_LMS.Models.MTeacher
 
         public string? courseImage { get; set; }
 
-        [Required]
+        [JsonIgnore]
         public int teacherID { get; set; }
     }
 }
